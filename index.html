@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NEON BLOCKS – Arcade Puzzle</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Scanline overlay -->
+  <div class="scanlines"></div>
+
+  <div class="wrapper">
+
+    <!-- Logo + Title -->
+    <header class="game-header">
+      <div class="logo-wrap">
+        <img src="logo.svg" alt="Logo" class="logo" onerror="this.style.display='none'" />
+      </div>
+      <h1 class="game-title">
+        <span class="title-neon">NEON</span>
+        <span class="title-blocks">BLOCKS</span>
+      </h1>
+      <p class="subtitle">ARCADE PUZZLE</p>
+    </header>
+
+    <div class="game-layout">
+
+      <!-- Left Panel -->
+      <aside class="panel panel-left">
+        <div class="panel-card">
+          <div class="label">SCORE</div>
+          <div class="value" id="score">0</div>
+        </div>
+        <div class="panel-card">
+          <div class="label">HIGH SCORE</div>
+          <div class="value" id="highscore">0</div>
+        </div>
+        <div class="panel-card">
+          <div class="label">LEVEL</div>
+          <div class="value" id="level">1</div>
+        </div>
+        <div class="panel-card">
+          <div class="label">LINES</div>
+          <div class="value" id="lines">0</div>
+        </div>
+        <div class="panel-card difficulty-card">
+          <div class="label">DIFFICULTY</div>
+          <select id="difficulty" class="diff-select">
+            <option value="easy">EASY ×1</option>
+            <option value="medium" selected>MEDIUM ×1.5</option>
+            <option value="hard">HARD ×2</option>
+            <option value="expert">EXPERT ×3</option>
+          </select>
+        </div>
+        <div class="panel-card">
+          <div class="label">CONTROLS</div>
+          <div class="controls-list">
+            <div class="ctrl"><kbd>←→</kbd> Move</div>
+            <div class="ctrl"><kbd>↑</kbd> Rotate</div>
+            <div class="ctrl"><kbd>↓</kbd> Soft Drop</div>
+            <div class="ctrl"><kbd>SPC</kbd> Hard Drop</div>
+            <div class="ctrl"><kbd>P</kbd> Pause</div>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Game Board Area -->
+      <main class="board-area">
+        <div class="board-wrapper">
+          <canvas id="gameCanvas" width="300" height="600"></canvas>
+          <canvas id="particleCanvas" width="300" height="600"></canvas>
+          <!-- Overlays -->
+          <div class="overlay" id="startOverlay">
+            <div class="overlay-box">
+              <div class="overlay-title">NEON BLOCKS</div>
+              <div class="overlay-sub">Select difficulty and press START</div>
+              <button class="btn btn-start" id="startBtn">▶ START</button>
+            </div>
+          </div>
+          <div class="overlay hidden" id="pauseOverlay">
+            <div class="overlay-box">
+              <div class="overlay-title">PAUSED</div>
+              <button class="btn btn-start" id="resumeBtn">▶ RESUME</button>
+            </div>
+          </div>
+          <div class="overlay hidden" id="gameoverOverlay">
+            <div class="overlay-box">
+              <div class="overlay-title gameover-text">GAME OVER</div>
+              <div class="overlay-sub">Score: <span id="finalScore">0</span></div>
+              <button class="btn btn-start" id="restartBtn">↺ RESTART</button>
+            </div>
+          </div>
+        </div>
+        <!-- Buttons below board -->
+        <div class="btn-row">
+          <button class="btn btn-ctrl" id="btnStart2">START</button>
+          <button class="btn btn-ctrl" id="btnPause">PAUSE</button>
+          <button class="btn btn-ctrl" id="btnRestart">RESTART</button>
+        </div>
+        <!-- Mobile touch controls -->
+        <div class="mobile-controls">
+          <div class="mobile-row">
+            <button class="mob-btn" id="mobLeft">◀</button>
+            <button class="mob-btn" id="mobRotate">↻</button>
+            <button class="mob-btn" id="mobRight">▶</button>
+          </div>
+          <div class="mobile-row">
+            <button class="mob-btn mob-wide" id="mobDown">▼ DROP</button>
+            <button class="mob-btn mob-wide" id="mobDrop">⬇ INSTANT</button>
+          </div>
+        </div>
+      </main>
+
+      <!-- Right Panel -->
+      <aside class="panel panel-right">
+        <div class="panel-card">
+          <div class="label">NEXT</div>
+          <canvas id="nextCanvas" width="120" height="120"></canvas>
+        </div>
+        <div class="panel-card leaderboard-card">
+          <div class="label">LEADERBOARD</div>
+          <ol class="leaderboard" id="leaderboard"></ol>
+        </div>
+        <div class="panel-card">
+          <div class="label">COMBO</div>
+          <div class="value combo-val" id="combo">×1</div>
+        </div>
+        <div class="panel-card">
+          <div class="label">MULTIPLIER</div>
+          <div class="value mult-val" id="multiplier">×1.5</div>
+        </div>
+      </aside>
+
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
